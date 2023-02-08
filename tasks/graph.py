@@ -28,7 +28,11 @@ class Graph:
         self._root = root
 
     def dfs(self) -> list[Node]:
-        raise NotImplementedError
+        result = [self._root]
+        for node in self._root.outbound:
+            result += Graph(node).dfs()
+        return result
+
 
     def bfs(self) -> list[Node]:
         raise NotImplementedError
