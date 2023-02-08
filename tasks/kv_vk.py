@@ -44,7 +44,8 @@ def flip_kv_vk_safe(d: dict[KT, KV]) -> dict[KV, list[KT]]:
     """
     new_d = {}
     for key in d.keys():
-        if d[key] not in new_d:
-            new_d[ d[key] ] = []
-        new_d[ d[key] ].append(key)
+        value = d[key]
+        if value not in new_d:
+            new_d[ value ] = []
+        new_d[ value ].append(key)
     return new_d
