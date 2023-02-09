@@ -44,13 +44,13 @@ class Graph:
 
     def bfs(self) -> list[Node]:
         result = []
-        stack  = [self._root]
-        while stack:
-            if stack[-1] not in result:
-                node = stack.pop()
+        queue  = [self._root]
+        while queue:
+            if queue[-1] not in result:
+                node = queue.pop()
                 result.append(node)
-                stack = node.outbound[::-1] + stack
+                queue = node.outbound[::-1] + queue
             else:
-                stack.pop()
+                queue.pop()
 
         return result
