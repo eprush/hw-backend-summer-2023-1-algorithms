@@ -1,5 +1,5 @@
 from typing import Any
-
+from queue import Queue
 __all__ = (
     'Node',
     'Graph'
@@ -28,11 +28,29 @@ class Graph:
         self._root = root
 
     def dfs(self) -> list[Node]:
+        def recursive_dfs(node, res):
+            if node not in res:
+                res.append(node)
+                for other in node.outbound:
+                    recursive_dfs(other, res)
+            return
+
         result = [self._root]
         for node in self._root.outbound:
-            result += Graph(node).dfs()
+            recursive_dfs(node, result)
         return result
 
 
+
     def bfs(self) -> list[Node]:
-        raise NotImplementedError
+        result = []
+        stack  = [self._root]
+        while stack:
+            if stack[-1] not in result:
+                node = stack.pop()
+                result.append(node)
+                stack = node.outbound[::-1] + stack
+            else:
+                stack.pop()
+
+        return result
