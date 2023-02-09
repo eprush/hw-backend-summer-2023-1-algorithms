@@ -1,5 +1,5 @@
 from typing import Any
-from queue import Queue
+
 __all__ = (
     'Node',
     'Graph'
